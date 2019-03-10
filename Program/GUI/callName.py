@@ -1,8 +1,8 @@
-import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QApplication
 from Program.GUI.demoGui import *
 import matplotlib.pyplot as plt
 import numpy as np
+import Program.signal as g
 
 
 class MyForm(QMainWindow):
@@ -29,10 +29,3 @@ class MyForm(QMainWindow):
         y = np.sin(2 * np.pi * f * x / Fs)
         plt.plot(x, y)
         plt.show()
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    w = MyForm()
-    w.show()
-    sys.exit(app.exec_())
