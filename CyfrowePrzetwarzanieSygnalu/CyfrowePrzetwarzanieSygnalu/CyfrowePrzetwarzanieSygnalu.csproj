@@ -68,6 +68,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="CalculateWindowViewModel.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="NewSignalViewModel.cs" />
     <Compile Include="PointXY.cs" />

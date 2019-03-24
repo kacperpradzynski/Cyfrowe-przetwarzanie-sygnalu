@@ -68,48 +68,63 @@ namespace OperacjeNaDanych
         }
         public void LoadFromFile(string filePath)
         {
-            using (BinaryReader reader = new BinaryReader(File.OpenRead(filePath)))
+            try
             {
-                Samples = new List<double>();
-                StartTime = reader.ReadDouble();
-                Frequency = reader.ReadDouble();
-                Type = reader.ReadByte();
-
-                int length = reader.ReadInt32();
-                for (int i = 0; i < length; i++)
+                using (BinaryReader reader = new BinaryReader(File.OpenRead(filePath)))
                 {
+                    Samples = new List<double>();
+                    StartTime = reader.ReadDouble();
+                    Frequency = reader.ReadDouble();
+                    Type = reader.ReadByte();
 
-                    Samples.Add(reader.ReadDouble());
+                    int length = reader.ReadInt32();
+                    for (int i = 0; i < length; i++)
+                    {
+
+                        Samples.Add(reader.ReadDouble());
+                    }
+                    CalculateSamplesX();
                 }
-                CalculateSamplesX();
+            } catch(Exception)
+            {
+
             }
+            
         }
         public void SaveToFile(string filePath)
         {
-            using (BinaryWriter writer = new BinaryWriter(File.Create(filePath)))
+            try
             {
-                writer.Write(StartTime);
-                writer.Write(Frequency);
-                writer.Write(Type);
-                writer.Write(Samples.Count);
-                foreach (double sample in Samples)
+                using (BinaryWriter writer = new BinaryWriter(File.Create(filePath)))
                 {
-                    writer.Write(sample);
+                    writer.Write(StartTime);
+                    writer.Write(Frequency);
+                    writer.Write(Type);
+                    writer.Write(Samples.Count);
+                    foreach (double sample in Samples)
+                    {
+                        writer.Write(sample);
+                    }
                 }
-            }
-            string newPath = Path.ChangeExtension(filePath, ".txt");
+                string newPath = Path.ChangeExtension(filePath, ".txt");
 
-            using (StreamWriter writer = new StreamWriter(newPath))
-            {
-                writer.WriteLine("Start Time: " + StartTime);
-                writer.WriteLine("Frequency: " + Frequency);
-                writer.WriteLine("Type: " + Type);
-                writer.WriteLine("Number of samples: " + Samples.Count);
-                for (int i = 0; i < Samples.Count; i++)
+                using (StreamWriter writer = new StreamWriter(newPath))
                 {
-                    writer.WriteLine(i + 1 + ". " + Samples[i]);
+                    writer.WriteLine("Start Time: " + StartTime);
+                    writer.WriteLine("Frequency: " + Frequency);
+                    writer.WriteLine("Type: " + Type);
+                    writer.WriteLine("Number of samples: " + Samples.Count);
+                    for (int i = 0; i < Samples.Count; i++)
+                    {
+                        writer.WriteLine(i + 1 + ". " + Samples[i]);
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+            }
+            
         }
 
         public bool HasData()

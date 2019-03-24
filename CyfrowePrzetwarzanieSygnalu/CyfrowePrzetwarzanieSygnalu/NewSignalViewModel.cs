@@ -14,6 +14,8 @@ namespace CyfrowePrzetwarzanieSygnalu
         private MainWindowViewModel MWViewModel{ get; set; }
         public List<string> SignalTypes { get; set; }
         public string SelectedSignalType { get; set; }
+        public ObservableCollection<TabViewModel> Tabs { get; set; }
+        public TabViewModel SelectedTab { get; set; }
         public ICommand DrawCommand { get; set; }
 
         public double A { get; set; }
@@ -31,6 +33,8 @@ namespace CyfrowePrzetwarzanieSygnalu
         public NewSignalViewModel(MainWindowViewModel MWVM)
         {
             MWViewModel = MWVM;
+            Tabs = MWVM.Tabs;
+            SelectedTab = MWVM.SelectedTab;
             SignalTypes = new List<string>()
             {
                 "(S01) Szum o rozkładzie jednostajnym",
@@ -45,12 +49,13 @@ namespace CyfrowePrzetwarzanieSygnalu
                 "(S10) Impuls jednostkowy",
                 "(S11) Szum impulsowy"
             };
-            SelectedSignalType = SignalTypes[2];
+            SelectedSignalType = SignalTypes[0];
             DrawCommand = new RelayCommand(Draw);
         }
 
         public void Draw()
         {
+            MWViewModel.SelectedTab = SelectedTab;
             SignalGenerator generator = new SignalGenerator()
             {
                 Amplitude = A,
@@ -159,7 +164,7 @@ namespace CyfrowePrzetwarzanieSygnalu
                 MWViewModel.SelectedTab.TabContent.IsScattered = isScattered;
                 MWViewModel.SelectedTab.TabContent.DrawCharts();
             }
-
+            //TODO
         }
     }
 }

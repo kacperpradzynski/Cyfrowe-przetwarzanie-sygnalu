@@ -19,8 +19,9 @@ namespace CyfrowePrzetwarzanieSygnalu
     /// </summary>
     public partial class CalculateWindow : Window
     {
-        public CalculateWindow()
+        public CalculateWindow(MainWindowViewModel MWVM)
         {
+            DataContext = new CalculateWindowViewModel(MWVM);
             InitializeComponent();
         }
     }

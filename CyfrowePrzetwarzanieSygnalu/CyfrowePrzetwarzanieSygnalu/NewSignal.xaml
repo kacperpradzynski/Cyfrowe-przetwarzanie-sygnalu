@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="NewSignal" Height="450" Width="450">
+        Title="Nowy Sygnał" Height="450" Width="450">
     <Grid>
         <Border Padding="10" Grid.Column="0">
             <StackPanel>
@@ -53,6 +53,8 @@
                         <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Probkowanie}" Margin="0 2 0 2"  Text="{Binding Fp}"/>
                     </StackPanel>
                 </Grid>
+                <TextBlock Margin="0 15 0 2" Text="Wybierz stronę:"/>
+                <ComboBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}"/>
                 <Button Padding ="2" Margin="20 5 20 5" Content="Nowy sygnał" Command="{Binding DrawCommand}"/>
             </StackPanel>
         </Border>

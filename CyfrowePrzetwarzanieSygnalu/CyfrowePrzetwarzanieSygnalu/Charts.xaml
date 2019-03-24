@@ -44,8 +44,6 @@
                 <Button Command="{Binding Histogram}" CommandParameter="10" Content="10"/>
                 <Button Command="{Binding Histogram}" CommandParameter="15" Content="15"/>
                 <Button Command="{Binding Histogram}" CommandParameter="20" Content="20"/>
-                <Slider Value="{Binding SliderValue}" MinHeight="100" Orientation="Vertical" Maximum="99" Minimum="1" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="TopLeft" Name="Slider"/>
-                <TextBox Text="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </StackPanel>
         </Grid>
 

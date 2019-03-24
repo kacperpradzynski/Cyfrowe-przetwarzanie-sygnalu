@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CyfrowePrzetwarzanieSygnalu"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280">
+        Title="Cyfrowe Przetwarzanie Sygnalu" Height="720" Width="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
@@ -36,11 +36,17 @@
         </Border>
         <Border Padding="10" Grid.Column="1">
             <StackPanel>
-
-                <Button Padding ="5" Margin="0 5 0 5" Content="Nowy sygnał" Command="{Binding PlotCommand}"/>
-                <Button Padding ="5" Margin="0 5 0 5" Content="Wczytaj sygnał" Command="{Binding LoadCommand}"/>
-                <Button Padding ="5" Margin="0 5 0 5" Content="Zapisz sygnał"    Command="{Binding SaveCommand}"/>
-                <Button Padding ="5" Margin="0 5 0 5" Content="Działania na sygnałach"    Command="{Binding CalculateCommand}"/>
+                <Button Padding ="5" Margin="0 5 0 15" Content="Nowy sygnał" Command="{Binding PlotCommand}"/>
+                <Border Padding ="5" Margin="0 15 0 15" BorderBrush="Black" BorderThickness="1">
+                    <Grid>
+                    <StackPanel>
+                            <ComboBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}"/>
+                            <Button Padding ="5" Margin="0 5 0 5" Content="Wczytaj sygnał" Command="{Binding LoadCommand}"/>
+                        <Button Padding ="5" Margin="0 5 0 5" Content="Zapisz sygnał"    Command="{Binding SaveCommand}"/>
+                    </StackPanel>
+                </Grid>
+                </Border>
+                <Button Padding ="5" Margin="0 15 0 5" Content="Działania na sygnałach"    Command="{Binding CalculateCommand}"/>
             </StackPanel>
         </Border>
     </Grid>
