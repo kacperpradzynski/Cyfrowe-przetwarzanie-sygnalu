@@ -19,7 +19,7 @@
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0" Content="Dodaj stronę" Command="{Binding AddPageCommand}" HorizontalAlignment="Left"/>
 
-                <TabControl Grid.Row="1" ItemsSource="{Binding Tabs}">
+                <local:TabControlNR Grid.Row="1" ItemsSource="{Binding Tabs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                     <TabControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock
@@ -31,7 +31,7 @@
                             <local:Charts DataContext="{Binding TabContent}"/>
                         </DataTemplate>
                     </TabControl.ContentTemplate>
-                </TabControl>
+                </local:TabControlNR>
             </Grid>
         </Border>
         <Border Padding="10" Grid.Column="1">
