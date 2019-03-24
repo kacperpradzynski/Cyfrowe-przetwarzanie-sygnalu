@@ -10,19 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CyfrowePrzetwarzanieSygnalu
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy NewSignal.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NewSignal : Window
     {
-        public MainWindow()
+        public NewSignal(MainWindowViewModel MWVM)
         {
-            DataContext = new MainWindowViewModel();
+            DataContext = new NewSignalViewModel(MWVM);
             InitializeComponent();
         }
     }

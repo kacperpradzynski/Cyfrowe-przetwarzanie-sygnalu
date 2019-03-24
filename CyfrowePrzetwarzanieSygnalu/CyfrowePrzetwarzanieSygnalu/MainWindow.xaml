@@ -7,6 +7,41 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Border Padding="10" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="Dodaj stronę" Command="{Binding AddPageCommand}" HorizontalAlignment="Left"/>
+
+                <TabControl Grid.Row="1" ItemsSource="{Binding Tabs}">
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                    Text="{Binding Header}" />
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <local:Charts DataContext="{Binding TabContent}"/>
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+            </Grid>
+        </Border>
+        <Border Padding="10" Grid.Column="1">
+            <StackPanel>
+
+                <Button Padding ="5" Margin="0 5 0 5" Content="Nowy sygnał" Command="{Binding PlotCommand}"/>
+                <Button Padding ="5" Margin="0 5 0 5" Content="Wczytaj sygnał" Command="{Binding LoadCommand}"/>
+                <Button Padding ="5" Margin="0 5 0 5" Content="Zapisz sygnał"    Command="{Binding SaveCommand}"/>
+                <Button Padding ="5" Margin="0 5 0 5" Content="Działania na sygnałach"    Command="{Binding CalculateCommand}"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>

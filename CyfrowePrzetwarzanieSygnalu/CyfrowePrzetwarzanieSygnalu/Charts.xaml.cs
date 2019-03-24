@@ -16,13 +16,12 @@ using System.Windows.Shapes;
 namespace CyfrowePrzetwarzanieSygnalu
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy Charts.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Charts : UserControl
     {
-        public MainWindow()
+        public Charts()
         {
-            DataContext = new MainWindowViewModel();
             InitializeComponent();
         }
     }
