@@ -1,0 +1,62 @@
+﻿<Window x:Class="CyfrowePrzetwarzanieSygnalu.NewSignal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Nowy Sygnał" Height="450" Width="450">
+    <Grid>
+        <Border Padding="10" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="Rodzaj Sygnału:"/>
+                <ComboBox ItemsSource="{Binding SignalTypes}" SelectedItem="{Binding SelectedSignalType}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=A}" Margin="1 2 0 2" Text="Amplituda(A):"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=T1}" Margin="1 2 0 2" Text="Czas początkowy(t1):"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Ts}" Margin="1 2 0 2" Text="Czas skoku(ts):"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=D}" Margin="1 2 0 2" Text="Czas trwania sygnału(d):"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=T}" Margin="1 2 0 2" Text="Okres podstawowy(T):"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Kw}" Margin="1 2 0 2" Text="Współczynnik wypełnienia(kw):" TextWrapping="Wrap"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=F}" Margin="1 2 0 2" Text="Częstotliwość próbkowania(f):" TextWrapping="Wrap"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=N1}" Margin="1 2 0 2" Text="Numer pierwszej próbki(n1):" TextWrapping="Wrap"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Ns}" Margin="1 2 0 2" Text="Numer próbki - skok A(ns):" TextWrapping="Wrap"/>
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=P}" Margin="1 2 0 2" Text="Prawdopodobieństwo(P):" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=A}" Margin="0 2 0 2"  Text="{Binding A}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=T1}" Margin="0 0 0 2"  Text="{Binding T1}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Ts}" Margin="0 0 0 2"  Text="{Binding Ts}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=D}" Margin="0 0 0 2"  Text="{Binding D}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=T}" Margin="0 0 0 2"  Text="{Binding T}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Kw}" Margin="0 0 0 2"  Text="{Binding Kw}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=F}" Margin="0 0 0 2"  Text="{Binding F}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=N1}" Margin="0 0 0 2"  Text="{Binding N1}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Ns}" Margin="0 0 0 2"  Text="{Binding Ns}"/>
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=P}" Margin="0 0 0 2"  Text="{Binding P}"/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Probkowanie}" Margin="1 10 0 2" Text="Próbkowanie" TextWrapping="Wrap"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Probkowanie}" Margin="1 2 0 2" Text="Częstotliwość próbkowania(f):"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Visibility="{Binding SelectedSignalType, Converter={StaticResource VisibilityConverter},ConverterParameter=Probkowanie}" Margin="0 2 0 2"  Text="{Binding Fp}"/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Margin="0 15 0 2" Text="Wybierz stronę:"/>
+                <ComboBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}"/>
+                <Button Padding ="2" Margin="20 5 20 5" Content="Nowy sygnał" Command="{Binding DrawCommand}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
