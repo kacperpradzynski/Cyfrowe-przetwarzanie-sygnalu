@@ -46,17 +46,31 @@ namespace OperacjeNaDanych
 
         public static List<double> DivideSignals(List<double> signal1, List<double> signal2)
         {
-            var signals = signal1.Concat(signal2).ToList();
-            var maxA = signals.Max();
             List<double> result = new List<double>();
+            List<int> index = new List<int>();
             for (int i = 0; i < signal1.Count; i++)
             {
-                if(signal2[i]==0.0)
+                if(Math.Abs(signal2[i]) <= 0.000001)
                 {
-                    result.Add(maxA);
+                    index.Add(i);
+                    result.Add(0.0);
                 } else
                 {
                     result.Add(signal1[i] / signal2[i]);
+                }
+            }
+            var signals = signal1.Concat(signal2).Concat(result).ToList();
+            var maxA = signals.Max();
+            var minA = signals.Min();
+
+            foreach(int i in index)
+            {
+                if(signal1[i]>0)
+                {
+                    result[i] = maxA;
+                } else if (signal1[i]<0)
+                {
+                    result[i] = minA;
                 }
             }
 
