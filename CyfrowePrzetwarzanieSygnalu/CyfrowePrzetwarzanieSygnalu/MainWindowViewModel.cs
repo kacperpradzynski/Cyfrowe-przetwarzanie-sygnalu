@@ -54,9 +54,13 @@ namespace CyfrowePrzetwarzanieSygnalu
 
         public void Load()
         {
-            SelectedTab.TabContent.LoadDataFromFile(LoadPath(true));
-            SelectedTab.TabContent.DrawCharts();
-            SelectedTab.TabContent.CalculateSignalInfo(isDiscrete: true, fromSamples: true);
+            string LoadedPath = LoadPath(true);
+            if(LoadedPath != null)
+            {
+                SelectedTab.TabContent.LoadDataFromFile(LoadedPath);
+                SelectedTab.TabContent.DrawCharts();
+                SelectedTab.TabContent.CalculateSignalInfo(isDiscrete: true, fromSamples: true);
+            }
         }
         public string LoadPath(bool loadMode)
         {
