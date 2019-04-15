@@ -80,6 +80,8 @@ namespace CyfrowePrzetwarzanieSygnalu
                 data.FromSamples = true;
                 SelectedResultTab.TabContent.IsScattered = true;
                 SelectedResultTab.TabContent.LoadData(data);
+                SelectedResultTab.TabContent.AddOriginal = false;
+                SelectedResultTab.TabContent.AddSamples = false;
                 SelectedResultTab.TabContent.DrawCharts();
                 SelectedResultTab.TabContent.CalculateSignalInfo(isDiscrete: true, fromSamples: true);
             }

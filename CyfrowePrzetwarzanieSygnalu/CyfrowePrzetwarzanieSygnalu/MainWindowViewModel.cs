@@ -66,6 +66,8 @@ namespace CyfrowePrzetwarzanieSygnalu
             if(LoadedPath != null)
             {
                 SelectedTab.TabContent.LoadDataFromFile(LoadedPath);
+                SelectedTab.TabContent.AddOriginal = false;
+                SelectedTab.TabContent.AddSamples = false;
                 SelectedTab.TabContent.DrawCharts();
                 SelectedTab.TabContent.CalculateSignalInfo(isDiscrete: true, fromSamples: true);
             }

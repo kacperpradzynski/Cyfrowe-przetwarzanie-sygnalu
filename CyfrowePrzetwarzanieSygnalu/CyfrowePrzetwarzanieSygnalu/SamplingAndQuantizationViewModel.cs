@@ -58,10 +58,15 @@ namespace CyfrowePrzetwarzanieSygnalu
                 }
                 DataHandler data = new DataHandler();
                 List<double> pointsY = new List<double>();
+                List<double> pointsYSamples = new List<double>();
                 switch (SelectedSignalOperation.Substring(1, 2))
                 {
                     case "S1":
                         pointsY = SignalACOperations.Sampling(SelectedTab.TabContent.Data.Samples, SelectedTab.TabContent.Data.Frequency/F);
+                        pointsYSamples = pointsY;
+                        SelectedResultTab.TabContent.AddSamples = true;
+                        SelectedResultTab.TabContent.Space = (int)(SelectedTab.TabContent.Data.Frequency / F);
+                        SelectedResultTab.TabContent.PointsYSamples = pointsYSamples;
                         switch (SelectedSignalReconstrution.Substring(1, 2))
                         {
                             case "R1":
@@ -71,15 +76,17 @@ namespace CyfrowePrzetwarzanieSygnalu
                                 pointsY = SignalCAOperations.Interpolation(pointsY, F, SelectedTab.TabContent.Data.Frequency);
                                 break;
                             case "R3":
-                                pointsY = SignalCAOperations.Reconstruction(pointsY, F, SelectedTab.TabContent.Data.Frequency);
+                                pointsY = SignalCAOperations.Reconstruction(pointsY, SelectedTab.TabContent.Data.StartTime, F, SelectedTab.TabContent.Data.Frequency);
                                 break;
                         }
                         break;
                     case "Q1":
                         pointsY = SignalACOperations.QuantizationCut(SelectedTab.TabContent.Data.Samples, N);
+                        SelectedResultTab.TabContent.AddSamples = false;
                         break;
                     case "Q2":
                         pointsY = SignalACOperations.QuantizationRound(SelectedTab.TabContent.Data.Samples, N);
+                        SelectedResultTab.TabContent.AddSamples = false;
                         break;
                 }
 
@@ -89,6 +96,8 @@ namespace CyfrowePrzetwarzanieSygnalu
                 data.FromSamples = true;
                 SelectedResultTab.TabContent.IsScattered = true;
                 SelectedResultTab.TabContent.LoadData(data);
+                SelectedResultTab.TabContent.AddOriginal = true;
+                SelectedResultTab.TabContent.PointsYOriginal = SelectedTab.TabContent.Data.Samples;
                 SelectedResultTab.TabContent.DrawCharts();
                 SelectedResultTab.TabContent.CalculateSignalInfo(isDiscrete: true, fromSamples: true);
                 double MSE = MeasuresOfSimilarity.MSE(SelectedTab.TabContent.Data.Samples, pointsY);

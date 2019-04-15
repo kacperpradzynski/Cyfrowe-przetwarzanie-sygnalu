@@ -17,6 +17,8 @@ namespace CyfrowePrzetwarzanieSygnalu
         private int _sliderValue;
         public SeriesCollection ChartSeries { get; set; }
         public bool IsScattered { get; set; }
+        public bool AddOriginal { get; set; }
+        public bool AddSamples { get; set; }
         public SeriesCollection HistogramSeries { get; set; }
         public int HistogramStep { get; set; }
         public string[] Labels { get; set; }
@@ -26,6 +28,9 @@ namespace CyfrowePrzetwarzanieSygnalu
         public double AvgSignalPower { get; set; }
         public double SignalVariance { get; set; }
         public double RMSSignal { get; set; }
+        public List<double> PointsYOriginal { get; set; }
+        public List<double> PointsYSamples { get; set; }
+        public int Space { get; set; }
 
         public ICommand Histogram { get; set; }
 
@@ -56,6 +61,8 @@ namespace CyfrowePrzetwarzanieSygnalu
                     .X(value => value.X)
                     .Y(value => value.Y);
                 ChartValues<PointXY> values = new ChartValues<PointXY>();
+                ChartValues<PointXY> valuesOriginal = new ChartValues<PointXY>();
+                ChartValues<PointXY> valuesSamples = new ChartValues<PointXY>();
                 List<double> pointsX;
                 List<double> pointsY;
                 if (Data.FromSamples)
@@ -68,9 +75,21 @@ namespace CyfrowePrzetwarzanieSygnalu
                     pointsX = Data.PointsX;
                     pointsY = Data.PointsY;
                 }
+                int index = 0;
                 for (int i = 0; i < pointsX.Count; i++)
                 {
                     values.Add(new PointXY(pointsX[i], pointsY[i]));
+                    if(AddOriginal)
+                    {
+                        valuesOriginal.Add(new PointXY(pointsX[i], PointsYOriginal[i]));
+                    }
+                    if (AddSamples && i%Space == 0)
+                    {
+              
+                        valuesSamples.Add(new PointXY(pointsX[i], PointsYSamples[index]));
+                        index++;
+                    }
+
                 }
 
                 if (IsScattered || Data.FromSamples)
@@ -84,6 +103,28 @@ namespace CyfrowePrzetwarzanieSygnalu
                             Values = values
                         }
                     };
+                    if (AddOriginal)
+                    {
+                        ChartSeries.Add(new LineSeries()
+                        {
+                            LineSmoothness = 0,
+                            StrokeThickness = 0.5,
+                            Fill = Brushes.Transparent,
+                            PointGeometry = null,
+                            Stroke = Brushes.Green,
+                            Values = valuesOriginal
+                        });
+                    }
+                    if (AddSamples)
+                    {
+                        ChartSeries.Add(new ScatterSeries()
+                        {
+                            PointGeometry = new EllipseGeometry(),
+                            StrokeThickness = 8,
+                            Stroke = Brushes.Red,
+                            Values = valuesSamples
+                        });
+                    }
                 }
                 else
                 {

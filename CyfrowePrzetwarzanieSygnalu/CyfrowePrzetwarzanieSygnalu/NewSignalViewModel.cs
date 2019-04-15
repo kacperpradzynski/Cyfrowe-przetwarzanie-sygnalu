@@ -162,6 +162,8 @@ namespace CyfrowePrzetwarzanieSygnalu
                 }
 
                 MWViewModel.SelectedTab.TabContent.IsScattered = isScattered;
+                SelectedTab.TabContent.AddOriginal = false;
+                SelectedTab.TabContent.AddSamples = false;
                 MWViewModel.SelectedTab.TabContent.DrawCharts();
             }
             //TODO
