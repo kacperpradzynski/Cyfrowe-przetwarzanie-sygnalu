@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataHandler.cs" />
+    <Compile Include="MeasuresOfSimilarity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalACOperations.cs" />
+    <Compile Include="SignalCAOperations.cs" />
     <Compile Include="SignalGenerator.cs" />
     <Compile Include="SignalOperations.cs" />
   </ItemGroup>

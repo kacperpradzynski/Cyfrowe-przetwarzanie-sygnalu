@@ -1,0 +1,38 @@
+﻿<Window x:Class="CyfrowePrzetwarzanieSygnalu.SamplingAndQuantization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Próbkowanie i kwantyzacja" Height="450" Width="450">
+    <Grid>
+        <Border Padding="10" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="Wybierz źródło:"/>
+                <ComboBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}"/>
+                <TextBlock Margin="0 10 0 0" Text="Rodzaj operacji:"/>
+                <ComboBox Margin="0 0 0 5"  ItemsSource="{Binding SignalOperation}" SelectedItem="{Binding SelectedSignalOperation}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="49*"/>
+                        <ColumnDefinition Width="267*"/>
+                        <ColumnDefinition Width="106*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,14">
+                        <TextBlock Visibility="{Binding SelectedSignalOperation, Converter={StaticResource VisibilityConverter2},ConverterParameter=F}" Margin="1 2 0 2" Text="Częstotliwość (f):" TextWrapping="Wrap"/>
+                        <TextBlock Visibility="{Binding SelectedSignalOperation, Converter={StaticResource VisibilityConverter2},ConverterParameter=N}" Margin="1 2 0 2" Text="Liczba poziomów kwantyzacji:"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Margin="0,0,0,14">
+                        <TextBox Visibility="{Binding SelectedSignalOperation, Converter={StaticResource VisibilityConverter2},ConverterParameter=F}" Margin="0 0 0 2"  Text="{Binding F}"/>
+                        <TextBox Visibility="{Binding SelectedSignalOperation, Converter={StaticResource VisibilityConverter2},ConverterParameter=N}" Margin="0 2 0 2"  Text="{Binding N}"/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Visibility="{Binding SelectedSignalOperation, Converter={StaticResource VisibilityConverter2},ConverterParameter=R}" Margin="0 0 0 0" Text="Rodzaj rekonstrukcji:"/>
+                <ComboBox Visibility="{Binding SelectedSignalOperation, Converter={StaticResource VisibilityConverter2},ConverterParameter=R}" ItemsSource="{Binding SignalReconstrutions}" SelectedItem="{Binding SelectedSignalReconstrution}"/>
+                <TextBlock Margin="0 10 0 0" Text="Wynik (Wybór strony):"/>
+                <ComboBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedResultTab}"/>
+                <Button Padding ="2" Margin="20 5 20 5" Content="Wykonaj" Command="{Binding SAQCommand}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -73,10 +73,15 @@
     <Compile Include="NewSignalViewModel.cs" />
     <Compile Include="PointXY.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="SamplingAndQuantization.xaml.cs">
+      <DependentUpon>SamplingAndQuantization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SamplingAndQuantizationViewModel.cs" />
     <Compile Include="TabContentViewModel.cs" />
     <Compile Include="TabControlNR.cs" />
     <Compile Include="TabViewModel.cs" />
     <Compile Include="VisibilityConverter.cs" />
+    <Compile Include="VisibilityConverter2.cs" />
     <Page Include="CalculateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +109,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewSignal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SamplingAndQuantization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,8 +18,8 @@ namespace CyfrowePrzetwarzanieSygnalu
         public ICommand AddPageCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand LoadCommand { get; set; }
-
         public ICommand CalculateCommand { get; set; }
+        public ICommand SamplingAndQuantization { get; set; }
         public MainWindowViewModel()
         {
             Tabs = new ObservableCollection<TabViewModel>() { new TabViewModel("Sygnał 0") };
@@ -29,7 +29,15 @@ namespace CyfrowePrzetwarzanieSygnalu
             SaveCommand = new RelayCommand(Save);
             LoadCommand = new RelayCommand(Load);
             CalculateCommand = new RelayCommand(OpenCalculateWindow);
+            SamplingAndQuantization = new RelayCommand(OpenSamplingAndQuantization);
         }
+ 
+        public void OpenSamplingAndQuantization()
+        {
+            SamplingAndQuantization samplingAndQuantization = new SamplingAndQuantization(this);
+            samplingAndQuantization.Show();
+        }
+
         public void OpenSignalWindow()
         {
             NewSignal newSignal = new NewSignal(this);
@@ -74,7 +82,7 @@ namespace CyfrowePrzetwarzanieSygnalu
                 openFileDialog.ShowDialog();
                 if (openFileDialog.FileName.Length == 0)
                 {
-                    MessageBox.Show("No files selected");
+                    MessageBox.Show("No files selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return null;
                 }
 
@@ -88,7 +96,7 @@ namespace CyfrowePrzetwarzanieSygnalu
             saveFileDialog.ShowDialog();
             if (saveFileDialog.FileName.Length == 0)
             {
-                MessageBox.Show("No files selected");
+                MessageBox.Show("No files selected","Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
 

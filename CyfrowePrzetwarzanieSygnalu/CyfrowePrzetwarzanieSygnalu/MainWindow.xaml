@@ -47,6 +47,7 @@
                 </Grid>
                 </Border>
                 <Button Padding ="5" Margin="0 15 0 5" Content="Działania na sygnałach"    Command="{Binding CalculateCommand}"/>
+                <Button Padding ="5" Margin="0 15 0 5" Content="Próbkowanie i kwantyzacja"    Command="{Binding SamplingAndQuantization}"/>
             </StackPanel>
         </Border>
     </Grid>
