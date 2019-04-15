@@ -8,35 +8,54 @@ namespace OperacjeNaDanych
 {
     public class SignalCAOperations
     {
-        public static List<double> Extrapolation(List<double> signal, double samplingFrequency, double signalFrequency)
+        public static List<double> Extrapolation(List<double> signal, double samplingFrequency, double signalFrequency, int points)
         {
             List<double> result = new List<double>();
-            foreach(double value in signal)
+            int space = (int)(signalFrequency / samplingFrequency);
+            int n = 0;
+            for (int i = 0; i < points; i++)
             {
-                for(int i = 0; i < signalFrequency / samplingFrequency; i++)
+                result.Add(signal[n]);
+                if(i%space == space-1)
                 {
-                    result.Add(value);
+                    n++;
                 }
             }
-            result.RemoveRange(result.Count + 1 - (int)(signalFrequency / samplingFrequency), (int)(signalFrequency / samplingFrequency) - 1);
             return result;
         }
-        public static List<double> Interpolation(List<double> signal, double samplingFrequency, double signalFrequency)
+        public static List<double> Interpolation(List<double> signal, double samplingFrequency, double signalFrequency,int points)
         {
             List<double> result = new List<double>();
-            int points = ((int)(signalFrequency / samplingFrequency) * signal.Count) - ((int)(signalFrequency / samplingFrequency) - 1 );
             int time = points / (int)signalFrequency;
+            int space = (int)(signalFrequency / samplingFrequency);
             double X = 0;
-            for (int j = 0; j < signal.Count-1; j++)
+            int n = 0;
+            if(signal.Count%2 == 0)
             {
-                for (int i = 0; i < signalFrequency / samplingFrequency; i++)
+                signal.Add(signal[0]);
+                for (int i = 0; i < points; i++)
                 {
-                    result.Add(LinearInterpolation(0,signal[j], 1/samplingFrequency ,signal[j+1],X));
+                    result.Add(LinearInterpolation(0, signal[n], 1 / samplingFrequency, signal[n + 1], X));
                     X += 1 / signalFrequency;
+                    if (X * signalFrequency == space)
+                    {
+                        X = 0;
+                        n++;
+                    }
                 }
-                X = 0;
+            } else
+            {
+                for (int j = 0; j < signal.Count - 1; j++)
+                {
+                    for (int i = 0; i < signalFrequency / samplingFrequency; i++)
+                    {
+                        result.Add(LinearInterpolation(0, signal[j], 1 / samplingFrequency, signal[j + 1], X));
+                        X += 1 / signalFrequency;
+                    }
+                    X = 0;
+                }
+                result.Add(signal.ElementAt(signal.Count - 1));
             }
-            result.Add(signal.ElementAt(signal.Count-1));
             return result;
         }
         public static List<double> Reconstruction(List<double> signal, double startTime, double samplingFrequency, double signalFrequency)

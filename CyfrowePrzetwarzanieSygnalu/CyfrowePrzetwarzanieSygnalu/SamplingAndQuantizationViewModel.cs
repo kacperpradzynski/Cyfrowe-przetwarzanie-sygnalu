@@ -70,10 +70,10 @@ namespace CyfrowePrzetwarzanieSygnalu
                         switch (SelectedSignalReconstrution.Substring(1, 2))
                         {
                             case "R1":
-                                pointsY = SignalCAOperations.Extrapolation(pointsY, F, SelectedTab.TabContent.Data.Frequency);
+                                pointsY = SignalCAOperations.Extrapolation(pointsY, F, SelectedTab.TabContent.Data.Frequency, SelectedTab.TabContent.Data.Samples.Count);
                                 break;
                             case "R2":
-                                pointsY = SignalCAOperations.Interpolation(pointsY, F, SelectedTab.TabContent.Data.Frequency);
+                                pointsY = SignalCAOperations.Interpolation(pointsY, F, SelectedTab.TabContent.Data.Frequency, SelectedTab.TabContent.Data.Samples.Count);
                                 break;
                             case "R3":
                                 pointsY = SignalCAOperations.Reconstruction(pointsY, SelectedTab.TabContent.Data.StartTime, F, SelectedTab.TabContent.Data.Frequency);
