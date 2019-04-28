@@ -45,12 +45,56 @@ namespace CyfrowePrzetwarzanieSygnalu
         }
 
         public DataHandler Data { get; set; }
+        public DataHandler AddedData { get; set; }
 
         public TabContentViewModel()
         {
             Data = new DataHandler();
+            AddedData = new DataHandler();
             Histogram = new RelayCommand<int>(LoadHistogram);
 
+        }
+
+        public void AddDrawCharts()
+        {
+            if (AddedData.HasData())
+            {
+                var mapper = Mappers.Xy<PointXY>()
+                    .X(value => value.X)
+                    .Y(value => value.Y);
+                ChartValues<PointXY> values = new ChartValues<PointXY>();
+                ChartValues<PointXY> valuesOriginal = new ChartValues<PointXY>();
+                ChartValues<PointXY> valuesSamples = new ChartValues<PointXY>();
+                List<double> pointsX;
+                List<double> pointsY;
+                if (AddedData.FromSamples)
+                {
+                    pointsX = AddedData.SamplesX;
+                    pointsY = AddedData.Samples;
+                }
+                else
+                {
+                    pointsX = AddedData.PointsX;
+                    pointsY = AddedData.PointsY;
+                }
+                for (int i = 0; i < pointsX.Count; i++)
+                {
+                    values.Add(new PointXY(pointsX[i], pointsY[i]));
+                }
+
+                    ChartSeries.Add(
+                    
+                        new LineSeries()
+                        {
+                            LineSmoothness = 0,
+                            StrokeThickness = 0.5,
+                            Fill = Brushes.Transparent,
+                            PointGeometry = null,
+                            Values = values
+                        }
+                    );
+                
+            }
         }
 
         public void DrawCharts()
@@ -96,10 +140,12 @@ namespace CyfrowePrzetwarzanieSygnalu
                 {
                     ChartSeries = new SeriesCollection(mapper)
                     {
-                        new ScatterSeries()
+                        new LineSeries()
                         {
-                            PointGeometry = new EllipseGeometry(),
-                            StrokeThickness = 5,
+                            LineSmoothness = 0,
+                            StrokeThickness = 0.5,
+                            Fill = Brushes.Transparent,
+                            PointGeometry = null,
                             Values = values
                         }
                     };
@@ -212,6 +258,22 @@ namespace CyfrowePrzetwarzanieSygnalu
                 Data.FromSamples = false;
                 Data.PointsX = x;
                 Data.PointsY = y;
+            }
+
+
+        }
+        public void AddLoadData(List<double> x, List<double> y, bool fromSamples)
+        {
+            if (fromSamples)
+            {
+                AddedData.FromSamples = true;
+                AddedData.Samples = y;
+            }
+            else
+            {
+                AddedData.FromSamples = false;
+                AddedData.PointsX = x;
+                AddedData.PointsY = y;
             }
 
 

@@ -30,6 +30,10 @@ namespace CyfrowePrzetwarzanieSygnalu
                     if (param == "N")
                         return Visibility.Visible;
                     break;
+                case "R3":
+                    if (param == "P")
+                        return Visibility.Visible;
+                    break;
             }
             return Visibility.Collapsed;
 

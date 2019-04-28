@@ -58,24 +58,32 @@ namespace OperacjeNaDanych
             }
             return result;
         }
-        public static List<double> Reconstruction(List<double> signal, double startTime, double samplingFrequency, double signalFrequency)
+        public static List<double> Reconstruction(List<double> signal, double startTime, double samplingFrequency, double signalFrequency, int points, int N)
         {
             double Ts = 1 / samplingFrequency;
-            int N = 3;
             List<double> result = new List<double>();
-            double points = ((int)(signalFrequency / samplingFrequency) * signal.Count) - ((int)(signalFrequency / samplingFrequency) - 1);
+            int space = (int)(signalFrequency / samplingFrequency);
             double sum = 0.0;
             int n = 0;
             for (int i = 0; i < points; i++)
             {
                 double t = startTime + i / signalFrequency;
-                foreach (double sam in signal)
+                for(int j = (i/space)-N+1; j <= (i / space) + N; j++)
                 {
-                    double tmp1 = t / Ts - n;
-                    double tmp2 = Sinc(tmp1);
-                    sum += sam * tmp2;
-                    n++;
+                    if(j>=0 && j < signal.Count)
+                    {
+                        double tmp1 = t / Ts - j;
+                        double tmp2 = Sinc(tmp1);
+                        sum += signal[j] * tmp2;
+                    }
                 }
+                //foreach (double sam in signal)
+                //{
+                //    double tmp1 = t / Ts - n;
+                //    double tmp2 = Sinc(tmp1);
+                //    sum += sam * tmp2;
+                //    n++;
+                //}
                 result.Add(sum);
                 sum = 0.0;
                 n = 0;

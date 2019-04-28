@@ -23,6 +23,7 @@ namespace CyfrowePrzetwarzanieSygnalu
         public ICommand SAQCommand { get; set; }
         public double F { get; set; }
         public int N { get; set; }
+        public int P { get; set; }
         public SamplingAndQuantizationViewModel(MainWindowViewModel MWVM)
         {
             MWViewModel = MWVM;
@@ -76,7 +77,7 @@ namespace CyfrowePrzetwarzanieSygnalu
                                 pointsY = SignalCAOperations.Interpolation(pointsY, F, SelectedTab.TabContent.Data.Frequency, SelectedTab.TabContent.Data.Samples.Count);
                                 break;
                             case "R3":
-                                pointsY = SignalCAOperations.Reconstruction(pointsY, SelectedTab.TabContent.Data.StartTime, F, SelectedTab.TabContent.Data.Frequency);
+                                pointsY = SignalCAOperations.Reconstruction(pointsY, SelectedTab.TabContent.Data.StartTime, F, SelectedTab.TabContent.Data.Frequency, SelectedTab.TabContent.Data.Samples.Count, P);
                                 break;
                         }
                         break;
