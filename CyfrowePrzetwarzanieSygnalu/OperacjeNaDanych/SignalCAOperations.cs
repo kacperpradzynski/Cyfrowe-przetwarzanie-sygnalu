@@ -29,6 +29,7 @@ namespace OperacjeNaDanych
             int time = points / (int)signalFrequency;
             int space = (int)(signalFrequency / samplingFrequency);
             double X = 0;
+            int compare = 0;
             int n = 0;
             if(signal.Count%2 == 0)
             {
@@ -37,7 +38,8 @@ namespace OperacjeNaDanych
                 {
                     result.Add(LinearInterpolation(0, signal[n], 1 / samplingFrequency, signal[n + 1], X));
                     X += 1 / signalFrequency;
-                    if (X * signalFrequency == space)
+                    compare = (int)(X * signalFrequency);
+                    if (compare == space)
                     {
                         X = 0;
                         n++;

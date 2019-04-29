@@ -23,7 +23,7 @@ namespace OperacjeNaDanych
             List<double> compartment = new List<double>(compartments);
             double space = (signal.Max() - signal.Min()) / compartments;
             double value = signal.Min();
-            for(int i = 0; i < compartment.Capacity; i++)
+            for(int i = 0; i < compartments; i++)
             {
                 compartment.Add(value);
                 value += space;
