@@ -16,14 +16,14 @@ namespace OperacjeNaDanych
             for (int i = 0; i < points; i++)
             {
                 result.Add(signal[n]);
-                if(i%space == space-1)
+                if (i % space == space - 1)
                 {
                     n++;
                 }
             }
             return result;
         }
-        public static List<double> Interpolation(List<double> signal, double samplingFrequency, double signalFrequency,int points)
+        public static List<double> Interpolation(List<double> signal, double samplingFrequency, double signalFrequency, int points)
         {
             List<double> result = new List<double>();
             int time = points / (int)signalFrequency;
@@ -31,7 +31,7 @@ namespace OperacjeNaDanych
             double X = 0;
             int compare = 0;
             int n = 0;
-            if(signal.Count%2 == 0)
+            if (signal.Count % 2 == 0)
             {
                 signal.Add(signal[0]);
                 for (int i = 0; i < points; i++)
@@ -45,7 +45,8 @@ namespace OperacjeNaDanych
                         n++;
                     }
                 }
-            } else
+            }
+            else
             {
                 for (int j = 0; j < signal.Count - 1; j++)
                 {
@@ -70,9 +71,9 @@ namespace OperacjeNaDanych
             for (int i = 0; i < points; i++)
             {
                 double t = startTime + i / signalFrequency;
-                for(int j = (i/space)-N+1; j <= (i / space) + N; j++)
+                for (int j = (i / space) - N + 1; j <= (i / space) + N; j++)
                 {
-                    if(j>=0 && j < signal.Count)
+                    if (j >= 0 && j < signal.Count)
                     {
                         double tmp1 = t / Ts - j;
                         double tmp2 = Sinc(tmp1);
@@ -102,10 +103,11 @@ namespace OperacjeNaDanych
 
         private static double Sinc(double t)
         {
-            if(t == 0)
+            if (t == 0)
             {
                 return 1;
-            } else
+            }
+            else
             {
                 return (Math.Sin(Math.PI * t) / (Math.PI * t));
             }
