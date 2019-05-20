@@ -1,0 +1,47 @@
+﻿<Window x:Class="CyfrowePrzetwarzanieSygnalu.Filtering"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CyfrowePrzetwarzanieSygnalu"
+        mc:Ignorable="d"
+        Title="Splot, filtracja i korelacja" Height="450" Width="450">
+    <Grid>
+        <Border Padding="10" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Margin="0 5 0 2" Text="Operacja:"/>
+                <ComboBox ItemsSource="{Binding Operations}" SelectedItem="{Binding SelectedOperation}"/>
+                <ComboBox Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=F}" Margin="0 15 0 2" ItemsSource="{Binding Filters}" SelectedItem="{Binding SelectedFilter}"/>
+                <ComboBox Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=W}" Margin="0 15 0 2" ItemsSource="{Binding Windows}" SelectedItem="{Binding SelectedWindow}"/>
+                <TextBlock Margin="0 5 0 2" Text="Sygnał 1 (Wybór strony):"/>
+                <ComboBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedSignal1Tab}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=t}" Margin="1 5 0 0" Text="Czas przesunięcia(t) [s]:"/>
+                        <TextBlock Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=v}" Margin="1 5 0 0" Text="Prędkość sygnału w ośrodku(V) [m/s]:"/>
+                        <TextBlock Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=M}" Margin="1 5 0 0" Text="M:"/>
+                        <TextBlock Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=K}" Margin="1 5 0 0" Text="K:"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBox Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=t}" Margin="0 5 0 0"  Text="{Binding t}"/>
+                        <TextBox Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=v}" Margin="0 5 0 0"  Text="{Binding v}"/>
+                        <TextBox Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=M}" Margin="0 5 0 0"  Text="{Binding M}"/>
+                        <TextBox Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=K}" Margin="0 5 0 0"  Text="{Binding K}"/>
+                    </StackPanel>
+                </Grid>
+                <TextBlock Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=S2}" Margin="0 5 0 2" Text="Sygnał 2 (Wybór strony):"/>
+                <ComboBox Visibility="{Binding SelectedOperation, Converter={StaticResource VisibilityConverter3},ConverterParameter=S2}" ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedSignal2Tab}"/>
+                
+                <TextBlock Margin="0 5 0 2" Text="Wynik (Wybór strony):"/>
+                <ComboBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedResultTab}"/>
+
+                <Button Padding ="2" Margin="20 5 20 5" Content="Oblicz" Command="{Binding ComputeCommand}"/>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

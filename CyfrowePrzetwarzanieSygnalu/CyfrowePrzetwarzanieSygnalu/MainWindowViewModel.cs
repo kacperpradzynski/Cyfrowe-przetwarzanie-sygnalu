@@ -20,6 +20,7 @@ namespace CyfrowePrzetwarzanieSygnalu
         public ICommand LoadCommand { get; set; }
         public ICommand CalculateCommand { get; set; }
         public ICommand SamplingAndQuantization { get; set; }
+        public ICommand Filtering { get; set; }
         public MainWindowViewModel()
         {
             Tabs = new ObservableCollection<TabViewModel>() { new TabViewModel("Sygnał 0") };
@@ -30,12 +31,19 @@ namespace CyfrowePrzetwarzanieSygnalu
             LoadCommand = new RelayCommand(Load);
             CalculateCommand = new RelayCommand(OpenCalculateWindow);
             SamplingAndQuantization = new RelayCommand(OpenSamplingAndQuantization);
+            Filtering = new RelayCommand(OpenFiltering);
         }
  
         public void OpenSamplingAndQuantization()
         {
             SamplingAndQuantization samplingAndQuantization = new SamplingAndQuantization(this);
             samplingAndQuantization.Show();
+        }
+
+        public void OpenFiltering()
+        {
+            Filtering filtering = new Filtering(this);
+            filtering.Show();
         }
 
         public void OpenSignalWindow()

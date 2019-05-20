@@ -8,6 +8,7 @@
     <Application.Resources>
         <Converters:VisibilityConverter x:Key="VisibilityConverter"/>
         <Converters:VisibilityConverter2 x:Key="VisibilityConverter2"/>
+        <Converters:VisibilityConverter3 x:Key="VisibilityConverter3"/>
         <Style TargetType="{x:Type controls:TabControlNR}">
             <Setter Property="Template">
                 <Setter.Value>

@@ -153,5 +153,14 @@ namespace OperacjeNaDanych
                 return false;
             return true;
         }
+
+        public bool IsValidConvulution(DataHandler data)
+        {
+            if (!data.Frequency.Equals(Frequency))
+                return false;
+            if (!data.StartTime.Equals(StartTime))
+                return false;
+            return true;
+        }
     }
 }

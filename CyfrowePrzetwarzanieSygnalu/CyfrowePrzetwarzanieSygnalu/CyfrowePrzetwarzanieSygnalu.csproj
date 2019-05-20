@@ -69,6 +69,10 @@
     </ApplicationDefinition>
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="CalculateWindowViewModel.cs" />
+    <Compile Include="Filtering.xaml.cs">
+      <DependentUpon>Filtering.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FilteringViewModel.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="NewSignalViewModel.cs" />
     <Compile Include="PointXY.cs" />
@@ -82,11 +86,16 @@
     <Compile Include="TabViewModel.cs" />
     <Compile Include="VisibilityConverter.cs" />
     <Compile Include="VisibilityConverter2.cs" />
+    <Compile Include="VisibilityConverter3.cs" />
     <Page Include="CalculateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Charts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Filtering.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
