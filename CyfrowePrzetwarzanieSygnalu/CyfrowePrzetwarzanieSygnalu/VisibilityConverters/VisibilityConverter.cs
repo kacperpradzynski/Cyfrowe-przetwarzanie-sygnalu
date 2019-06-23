@@ -18,6 +18,18 @@ namespace CyfrowePrzetwarzanieSygnalu
             string arg = ((string)value).Substring(1, 3);
             switch (arg)
             {
+                case "S12":
+                    if (param == "T1" || param == "D" || param == "Probkowanie")
+                        return Visibility.Visible;
+                    break;
+                case "S13":
+                    if (param == "T1" || param == "D" || param == "Probkowanie")
+                        return Visibility.Visible;
+                    break;
+                case "S14":
+                    if (param == "T1" || param == "D" || param == "Probkowanie")
+                        return Visibility.Visible;
+                    break;
                 case "S01":
                     if (param == "A" || param == "T1" || param == "D" || param == "Probkowanie")
                         return Visibility.Visible;

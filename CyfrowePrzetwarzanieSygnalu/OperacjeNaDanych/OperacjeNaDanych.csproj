@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataHandler.cs" />
+    <Compile Include="FastFourierTransform.cs" />
+    <Compile Include="FourierTransform.cs" />
     <Compile Include="MeasuresOfSimilarity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalACOperations.cs" />
@@ -49,6 +52,7 @@
     <Compile Include="SignalFiltering.cs" />
     <Compile Include="SignalGenerator.cs" />
     <Compile Include="SignalOperations.cs" />
+    <Compile Include="WaveletTransform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

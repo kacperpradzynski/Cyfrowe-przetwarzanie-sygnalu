@@ -49,6 +49,7 @@
                 <Button Padding ="5" Margin="0 15 0 5" Content="Działania na sygnałach"    Command="{Binding CalculateCommand}"/>
                 <Button Padding ="5" Margin="0 15 0 5" Content="Próbkowanie i kwantyzacja"    Command="{Binding SamplingAndQuantization}"/>
                 <Button Padding ="5" Margin="0 15 0 5" Content="Splot, filtracja i korelacja"    Command="{Binding Filtering}"/>
+                <Button Padding ="5" Margin="0 15 0 5" Content="Transformacja"    Command="{Binding Transformation}"/>
             </StackPanel>
         </Border>
     </Grid>

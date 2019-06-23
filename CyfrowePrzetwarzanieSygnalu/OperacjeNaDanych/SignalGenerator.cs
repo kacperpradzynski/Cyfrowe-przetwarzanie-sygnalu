@@ -18,6 +18,18 @@ namespace OperacjeNaDanych
         public double Probability { get; set; }
         public Func<double, double> Func { get; set; }
 
+        public double GenerateSignalForTransformS1(double time)
+        {
+            return (2 * Math.Sin((2 * Math.PI / 2 * time) + (Math.PI / 2))) + 5*Math.Sin((2 * Math.PI / 0.5 * time) + (Math.PI/2));
+        }
+        public double GenerateSignalForTransformS2(double time)
+        {
+            return (2 * Math.Sin(2 * Math.PI / 2 * time)) + Math.Sin(2 * Math.PI / 1 * time) + 5*Math.Sin(2 * Math.PI / 0.5 * time);
+        }
+        public double GenerateSignalForTransformS3(double time)
+        {
+            return (5 * Math.Sin(2 * Math.PI / 2 * time)) + Math.Sin(2 * Math.PI / 0.25 * time);
+         }
         public double GenerateUniformDistributionNoise(double time = 0)
         {
             return random.NextDouble() * 2 * Amplitude - Amplitude;

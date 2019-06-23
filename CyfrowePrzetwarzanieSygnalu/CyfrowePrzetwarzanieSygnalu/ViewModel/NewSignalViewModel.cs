@@ -48,7 +48,10 @@ namespace CyfrowePrzetwarzanieSygnalu
                 "(S08) Sygnał trójkątny",
                 "(S09) Skok jednostkowy",
                 "(S10) Impuls jednostkowy",
-                "(S11) Szum impulsowy"
+                "(S11) Szum impulsowy",
+                "(S12) (S1) 2sin(2pi/2*t+pi/2)+5sin(2pi/0.5*t+pi/2)",
+                "(S13) (S2) 2sin(2pi/2*t)+sin(2pi/1*t)+5sin(2pi/0.5*t)",
+                "(S14) (S3) 5sin(2pi/2*t)+sin(2pi/0.25*t)",
             };
             SelectedSignalType = SignalTypes[0];
             DrawCommand = new RelayCommand(Draw);
@@ -75,6 +78,7 @@ namespace CyfrowePrzetwarzanieSygnalu
             Func<double, double> func = null;
             switch (SelectedSignalType.Substring(1, 3))
             {
+
                 case "S01":
                     func = generator.GenerateUniformDistributionNoise;
                     break;
@@ -107,6 +111,15 @@ namespace CyfrowePrzetwarzanieSygnalu
                     break;
                 case "S11":
                     func = generator.GenerateImpulseNoise;
+                    break;
+                case "S12":
+                    func = generator.GenerateSignalForTransformS1;
+                    break;
+                case "S13":
+                    func = generator.GenerateSignalForTransformS2;
+                    break;
+                case "S14":
+                    func = generator.GenerateSignalForTransformS3;
                     break;
 
             }
